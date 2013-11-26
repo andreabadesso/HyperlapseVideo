@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+	<title>KKKK</title> 
+
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script> 
+	<script src="js/three.min.js"></script>
+	<script src="js/GSVPano.js"></script>
+	<script src="../src/Hyperlapse.js"></script>
+	<script src="js/HyperlapseQueue.js"></script>
+	
+	<script> 
+	window.onload = function init(){
+		
+		var data = [{"origin":"43.454346,-3.936979","destination":"43.43079,-3.94539","elevation":0,"fov":80,"distance_between_points":1,"max_points":800}];
+
+		HyperlapseJob.max_points = 100;
+		HyperlapseJob.distance_between_points = 5;
+
+		window.callPhantom = window.callPhantom || function(data) {
+			console.log(data);
+		};
+		
+		var HQ = new HyperlapseQueue(document.getElementById('pano'),
+		{data: data, max_points: 100, distance_between_points: 5});
+
+		HQ.onFinish = function() {
+			console.log('finished');
+			window.callPhantom("finished");
+		};
+
+		HQ.onFrame = function(idx) {
+			window.callPhantom(idx);
+		};
+
+		HQ.onLoadComplete = function() {
+			window.callPhantom("loaded");
+		};
+
+		// Start the Hyperlapse queue
+		HQ.startNext();
+	}
+	</script> 
+
+	</head> 
+	<body> 
+		<div id="pano"></div>
+	</body> 
+	</html>
