@@ -1,5 +1,6 @@
 var page = new WebPage();
 
+var i = 0;
 page.onCallback = function(data) {
 
 	if (data === "finished") {    
@@ -17,8 +18,10 @@ page.onCallback = function(data) {
 	
 	// Ignorando a primeira imagem:
 	if (data !== 0) { 
-		page.render("./imagens/" + (data < 10 ? '0' + data : data)+ '.jpeg');
-		console.log("Salvei Imagem")  
+		//page.render("./imagens/" + (data < 10 ? '0' + data : data)+ '.jpeg');
+		page.render("./imagens/" + i + ".jpeg");
+		console.log("Salvei Imagem");  
+		i++;
 	}
 
 }
