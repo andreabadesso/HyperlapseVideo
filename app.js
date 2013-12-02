@@ -11,7 +11,7 @@ page.onCallback = function(data) {
 	if (data === "loaded") {    
 		console.log("Starting to create images...");    
 		return; 
-	}  
+	}
 
 	console.log("Creating image number: " + data + "...");  
 	
@@ -23,6 +23,14 @@ page.onCallback = function(data) {
 
 }
 
+page.onResourceRequested = function(request) {
+	console.log('Request ' + request.url);
+};
+/*
+page.onResourceReceived = function(response) {
+  console.log('Receive ' + JSON.stringify(response, undefined, 4));
+};
+*/
 page.open('./simple.html', function(status) {  
 	if (status !== 'success') {    
 		console.log('Unable to access network');  

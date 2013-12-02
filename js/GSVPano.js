@@ -60,6 +60,7 @@ GSVPANO.PanoLoader = function (parameters) {
 				this.onPanoramaLoad();
 			}
 		}
+
 		
 	};
 
@@ -82,12 +83,14 @@ GSVPANO.PanoLoader = function (parameters) {
 			for( x = 0; x < w; x++) {
 				url = 'http://maps.google.com/cbk?output=tile&panoid=' + panoId + '&zoom=' + _zoom + '&x=' + x + '&y=' + y + '&' + Date.now();
 				(function (x, y) { 
+					
 					var img = new Image();
 					img.addEventListener('load', function () {
 						self.composeFromTile(x, y, this);
 					});
 					img.crossOrigin = '';
 					img.src = url;
+					
 				})(x, y);
 			}
 		}
